@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Cumpleaños ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
+  text-align: center;
+  color: #4a2c2a;
+  overflow-x: hidden;
+}
+
+/* ===== LLUVIA DE CORAZONES ===== */
+.heart {
+  position: fixed;
+  top: -20px;
+  font-size: 18px;
+  color: #ff4d6d;
+  pointer-events: none;
+  animation: fall linear forwards;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(110vh) scale(0.6); opacity: 0; }
+}
+
+/* ===== IMÁGENES LATERALES ===== */
+.side-images {
+  position: fixed;
+  top: 120px;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+  /* sin bottom, sin overflow */
+}
+
+.side-images img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  opacity: 0.9;
+}
+
+.left-side { left: 10px; }
+.right-side { right: 10px; }
+
+@media (max-width: 900px) {
+  .side-images { display: none; }
+}
+
+/* ===== CONTENIDO ===== */
+.card {
+  background: white;
+  margin: 40px auto;
+  padding: 25px;
+  max-width: 900px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  position: relative;
+  z-index: 5;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* ===== CAJA DEL REGALO ===== */
+.gift-box {
+  width: 240px;
+  height: 240px;
+  margin: 30px auto;
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+}
+
+/* Imagen de la caja */
+.gift-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tapa azul animada */
+.lid {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 45%;
+  background: rgba(0, 60, 120, 0.95);
+  border-radius: 25px 25px 0 0;
+  transform: translateY(-120%);
+  transition: transform .9s ease;
+  z-index: 5;
+}
+
+.open .lid {
+  transform: translateY(-220%);
+}
+
+.gift-content {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  padding: 15px;
+  text-align: center;
+}
+
+.open .gift-content {
+  display: flex;
+}
+
+#bear {
+  width: 120px;
+  animation: dance 1s infinite alternate;
+}
+
+@keyframes dance {
+  from { transform: rotate(-5deg) translateY(0); }
+  to { transform: rotate(5deg) translateY(-12px); }
+}
+
+button {
+  background: #ff6f91;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* ===== CARTA 💌 ===== */
+.letter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.letter-box {
+  background: #ffffff;
+  max-width: 600px;
+  max-height: 80vh;
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  text-align: left;
+  overflow-y: auto;
+  position: relative;
+}
+
+.letter-box h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.letter-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #ff6f91;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter-trigger {
+  margin-top: 10px;
+}
+
+/* ===== GLOBO DE DIÁLOGO DE DORAEMON ===== */
+.doraemon-speech {
+  margin: 20px auto 0;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 15px 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.card .doraemon-speech {
+  position: relative;
+}
+
+.card .doraemon-speech::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  transform: translateX(-50%);
+  border-width: 0 12px 12px 12px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+}
+</style>
+</head>
+
+<body>
+
+<div class="side-images left-side">
+  <img src="lado1.jpg">
+  <img src="lado2.jpg">
+  <img src="lado5.jpg">
+</div>
+
+<div class="side-images right-side">
+  <img src="lado3.jpg">
+  <img src="lado4.jpg">
+  <img src="lado6.jpg">
+</div>
+
+<!-- CARD 1: DORAEMON HABLANDO -->
+<div class="card">
+  <h1>🥰 Feliz Cumpleaños mi amor 🥳</h1>
+  <p>Doraemon vino a felicitarte primero 🐱💙</p>
+  <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png" width="180">
+
+  <div class="doraemon-speech">
+    <p>
+      Hola cumpleañero, pensaba ayudar a Nobita con sus problemas como siempre,
+      pero decidí acompañarte en este día porque me hace muy feliz verte. 💙
+    </p>
+    <p>
+      Tengo algo en mi bolsillo mágico… mmm ¿qué es?... ¡ya lo encontré! 🎩✨
+      Te daré un papelito: escribe tu deseo y se cumplirá.
+    </p>
+    <p>
+      Te quiero demasiado, gracias por compartir ese tiempo de niño viéndome en la TV.
+      Siempre te llevaré en mi corazón.  
+      Atte: tu gato cósmico 🐱💫
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Nuestros momentos 🤩😘</h2>
+  <div class="gallery">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+  </div>
+</div>
+
+<div class="card">
+  <h2>Regalo sorpresa 🎁</h2>
+
+  <div id="passwordBox">
+    <p>🔒 Ingresa la contraseña</p>
+    <p style="font-size:14px;">💡 Pista: el día en que nos hicimos novios ❤️</p>
+    <input type="text" id="passwordInput" placeholder="dd/mm/aaaa">
+    <br><br>
+    <button onclick="checkPassword()">Abrir regalo</button>
+    <p id="errorMsg" style="color:red; display:none;">Intenta otra vez 💕</p>
+  </div>
+
+  <div id="gift" class="gift-box">
+    <!-- INICIAL: caja cerrada -->
+    <img id="giftImage" src="caja.png" alt="Regalo">
+
+    <div class="lid"></div>
+
+    <div class="gift-content">
+      <audio id="music" src="musica.mp3" loop></audio>
+      <img id="bear" src="osito.png">
+      <p id="message">💖 Feliz cumpleaños 💖</p>
+      <button id="nextBtn" onclick="nextMessage()">Siguiente 💕</button>
+    </div>
+  </div>
+</div>
+
+<!-- Botón para abrir la carta -->
+<div class="card">
+  <button class="letter-trigger" onclick="openLetter()">Ver cartita 💌</button>
+</div>
+
+<!-- Carta oculta -->
+<div id="letterOverlay" class="letter-overlay">
+  <div class="letter-box">
+    <button class="letter-close" onclick="closeLetter()">✖</button>
+    <h2>Para ti, mi amor 💖</h2>
+    <p>
+ Feliz cumpleaños, mi tiguesito hermoso 🤍 hoy quiero que recuerdes algo muy importante: tu existencia importa más de lo que imaginas y tu presencia hace la vida más bonita solo con estar. Sé que a veces este día te pone pensativo, pero mírame a mí, aquí estoy para recordarte todo lo bueno que eres, lo fuerte que has sido y lo lejos que has llegado, incluso cuando dudas de ti. Me siento orgullosa de ti, de tu corazón, de tu forma de amar y de no rendirte aunque no siempre sea fácil. Prometo seguir siendo tu apoyo, tu risa inesperada y ese lugar seguro donde siempre puedes descansar. Ojalá hoy te sientas abrazado con estas palabras, motivado para seguir soñando y con la certeza de que eres profundamente amado. Feliz cumpleaños, mi tiguesito precioso, este nuevo año viene con cosas bonitas para ti… y yo quiero estar ahí para verte brillar 🐯🎂❤️
+    </p>
+  </div>
+</div>
+
+<script>
+const messages = [
+  "💖 Feliz cumpleaños, mi amor 💖",
+  "Gracias por existir y por hacer mis días más bonitos ✨",
+  "No importa cuántas fotos tengamos, lo nuestro es único 💕",
+  "Eres el niño de mis ojos, mi lugar seguro, mi alegría y mi persona favorita 😘",
+  "Tenemos una salida pendiente👀 y más historias por vivir juntos ❤️",
+  "Deseo que todos tus sueños se cumplan 🎂",
+  "Nunca olvides cuánto te amo ❤️"
+];
+
+let index = 0;
+
+function normalizeDate(text) {
+  return text.replace(/\s/g, "").replace(/-/g, "/");
+}
+
+function checkPassword() {
+  const input = normalizeDate(
+    document.getElementById("passwordInput").value
+  );
+
+  const validDates = ["17/7/2025", "17/07/2025"];
+
+  if (validDates.includes(input)) {
+    document.getElementById("passwordBox").style.display = "none";
+
+    // Cambia a caja abierta
+    document.getElementById("giftImage").src = "caja_abierta.png";
+
+    // Muestra osito, texto y botón + anima tapa
+    document.getElementById("gift").classList.add("open");
+
+    document.getElementById("music").play();
+  } else {
+    document.getElementById("errorMsg").style.display = "block";
+  }
+}
+
+function nextMessage() {
+  index++;
+  if (index < messages.length) {
+    document.getElementById("message").textContent = messages[index];
+  } else {
+    document.getElementById("message").textContent =
+      "💞 Fin del regalo, pero no del amor 💞";
+    const btn = document.getElementById("nextBtn");
+    btn.textContent = "Finalizado 💖";
+    btn.disabled = true;
+  }
+}
+
+/* Carta: abrir / cerrar */
+function openLetter() {
+  document.getElementById("letterOverlay").style.display = "flex";
+}
+
+function closeLetter() {
+  document.getElementById("letterOverlay").style.display = "none";
+}
+
+// Cerrar carta haciendo clic en el fondo gris
+document.getElementById("letterOverlay").addEventListener("click", function(e) {
+  if (e.target.id === "letterOverlay") {
+    closeLetter();
+  }
+});
+
+/* ===== GENERADOR DE LLUVIA DE CORAZONES ===== */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 15 + 12 + "px";
+  heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}, 250);
+</script>
+
+</body>
+</html>
